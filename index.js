@@ -55,6 +55,12 @@ async function run() {
             const mobile = await cursor.toArray();
             res.send(mobile);
         });
+        // get limited Mobile Api
+        app.get('/mobiles/home', async (req, res) => {
+            const cursor = MobilesCollection.find({}).limit(6);
+            const mobile = await cursor.toArray();
+            res.send(mobile);
+        });
         //Post Mobiles API
         app.post('/mobiles', async (req, res) => {
             const mobiles = req.body;
