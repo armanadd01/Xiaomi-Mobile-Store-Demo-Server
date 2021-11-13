@@ -64,13 +64,7 @@ async function run() {
         //Post Mobiles API
         app.post('/mobiles', async (req, res) => {
             const mobiles = req.body;
-            console.log("🚀 ~ file: index.js ~ line 29 ~ app.post ~ mobiles", mobiles)
-            console.log('hit api');
-
-
             const result = await MobilesCollection.insertOne(mobiles);
-            console.log("🚀 ~ file: index.js ~ line 34 ~ app.post ~ result", result);
-
             res.json(result);
         });
 
@@ -94,7 +88,6 @@ async function run() {
 
         //Add odders
         app.post("/addorder", async (req, res) => {
-            console.log(req.body);
             const result = await OrdersCollection.insertOne(req.body);
             res.send(result);
         });
@@ -108,7 +101,6 @@ async function run() {
         });
         // Delete order
         app.delete("/deleteOrder/:id", async (req, res) => {
-            console.log(req.params.id);
             const result = await OrdersCollection.deleteOne({
                 _id: ObjectId(req.params.id),
             });
@@ -146,13 +138,7 @@ async function run() {
         //Post Reviews API
         app.post('/reviews', async (req, res) => {
             const reviews = req.body;
-            console.log("🚀 ~ file: index.js ~ line 29 ~ app.post ~ reviews", reviews)
-            console.log('hit api');
-
-
             const result = await ReviewsCollection.insertOne(reviews);
-            console.log("🚀 ~ file: index.js ~ line 34 ~ app.post ~ result", result);
-
             res.json(result);
         });
 
@@ -193,7 +179,6 @@ async function run() {
 
         app.put('/users/admin', verifyToken, async (req, res) => {
             const user = req.body;
-            console.log("🚀 ~ file: index.js ~ line 182 ~ app.put ~ req.body", req.headers)
 
             const requester = req.decodedEmail;
             if (requester) {
