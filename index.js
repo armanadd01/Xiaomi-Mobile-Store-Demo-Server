@@ -149,7 +149,7 @@ async function run() {
             const user = await cursor.toArray();
             res.send(user);
         });
-
+        //Get Single User Api
         app.get('/users/:email', async (req, res) => {
             const email = req.params.email;
             const query = { email: email };
@@ -160,14 +160,14 @@ async function run() {
             }
             res.json({ admin: isAdmin });
         })
-
+        //Post User Api
         app.post('/users', async (req, res) => {
             const user = req.body;
             const result = await UsersCollection.insertOne(user);
             console.log(result);
             res.json(result);
         });
-
+        //Upsert user Api
         app.put('/users', async (req, res) => {
             const user = req.body;
             const filter = { email: user.email };
@@ -176,7 +176,7 @@ async function run() {
             const result = await UsersCollection.updateOne(filter, updateDoc, options);
             res.json(result);
         });
-
+        //make user as admin
         app.put('/users/admin', verifyToken, async (req, res) => {
             const user = req.body;
 
@@ -191,7 +191,7 @@ async function run() {
                 }
             }
             else {
-                res.status(403).json({ message: 'you do not have access to make admin' })
+                res.status(403).json({ message: 'You do not have access to make admin' })
             }
 
         })
